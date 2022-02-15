@@ -1,5 +1,5 @@
 const Cars = require('./cars-model')
-var vinValidator = require('vin-validator')
+const vinValidator = require('vin-validator')
 const db = require('../../data/db-config')
 
 const checkCarId = async (req, res, next) => {
