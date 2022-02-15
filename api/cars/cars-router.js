@@ -22,6 +22,16 @@ router.get('/:id', checkCarId, (req, res, next) => {
     })
 })
 
+router.post('/', checkCarPayload, checkVinNumberValid, checkVinNumberUnique, (req, res, next) => {
+  Cars.create(req.body)
+    .then(createdCar => {
+      res.status(201).json(createdCar)
+    })
+    .catch(() => {
+      next()
+    })
+})
+
 router.use((err, req, res, next) => {// eslint-disable-line
   res.status(err.status || 500).json({
     message: err.message,
