@@ -7,7 +7,19 @@ router.get('/', (req, res, next) => {
     .then(cars => {
       res.json(cars)
     })
-    .catch(next)
+    .catch(() => {
+      next()
+    })
+})
+
+router.get('/:id', checkCarId, (req, res, next) => {
+  Cars.getById(req.params.id)
+    .then(car => {
+      res.json(car)
+    })
+    .catch(() => {
+      next()
+    })
 })
 
 router.use((err, req, res, next) => {// eslint-disable-line
